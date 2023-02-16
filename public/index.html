@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Grid Portfolio</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="left-text">
+                <div class="kuchu"><img src="kuchu.jpg" alt="" /></div>
+
+                <h2 class="heading">APKOOO KYAA</h2>
+                <p class="description">My Livfe my rhule!!!</p>
+            </div>
+            <div class="gallary">
+                <div
+                    class="box row-2"
+                    style="background-image: url('majnu.jpg')"
+                ></div>
+                <div
+                    class="box row-2"
+                    style="background-image: url('pongo3.jpg')"
+                ></div>
+                <div
+                    class="box"
+                    style="background-image: url('cock.jpg')"
+                ></div>
+                <div
+                    class="box"
+                    style="background-image: url('ginger.jpg')"
+                ></div>
+                <div
+                    class="box col-2"
+                    style="background-image: url('munna.jpg')"
+                ></div>
+                <div
+                    class="box row-2"
+                    style="background-image: url('meNyou.jpg')"
+                ></div>
+                <div
+                    class="box col-2"
+                    style="background-image: url('pillu.jpg')"
+                ></div>
+            </div>
+        </div>
+        <script>
+            document.querySelector(".box").onmousemove = (e) => {
+                const x = e.pageX - e.target.offsetLeft;
+                const y = e.pageY - e.target.offsetTop;
+
+                e.target.style.setProperty("--x", `${x}px`);
+                e.target.style.setProperty("--y", `${y}px`);
+            };
+
+            if ("geolocation" in navigator) {
+                console.log("Geo is availble");
+                navigator.geolocation.getCurrentPosition((position) => {
+                    console.log(position);
+                    const lat = position.coords.latitude;
+                    const long = position.coords.longitude;
+                    const data = { lat, long };
+                    const options = {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    };
+                    fetch("/api", options);
+                });
+            } else {
+                console.log("Geo is not availble");
+            }
+        </script>
+    </body>
+</html>

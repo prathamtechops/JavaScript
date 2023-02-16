@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <script>
+            chartIt();
+            async function chartIt() {
+                const ctx = document.getElementById("chart");
+                const data = await getData();
+                new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: data.x,
+                        datasets: [
+                            {
+                                label: "temperature",
+                                data: data.y,
+                                borderWidth: 1,
+                                fill: false,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                            },
+                        },
+                    },
+                });
+            }
+            getData();
+            async function getData() {
+                const x = [];
+                const y = [];
+
+                const result = await fetch("GLB.Ts+dSST.csv");
+                const data = await result.text();
+
+                const table = data.split("\n").slice(2);
+                table.forEach((row) => {
+                    const column = row.split(",");
+                    const year = column[0];
+                    x.push(year);
+                    const jan = column[1];
+                    y.push(jan);
+                });
+                return { x, y };
+            }
+        </script>
+    </body>
+</html>

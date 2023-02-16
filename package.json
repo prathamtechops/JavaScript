@@ -1,0 +1,27 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "This the data \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dis the data selfie app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prathamtechops/JavaScript.git"
+  },
+  "keywords": [
+    "example",
+    "data",
+    "selfie"
+  ],
+  "author": "Daniel Shiffman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prathamtechops/JavaScript/issues"
+  },
+  "homepage": "https://github.com/prathamtechops/JavaScript#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

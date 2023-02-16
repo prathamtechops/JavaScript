@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <canvas id="chart"></canvas>
+        <script>
+            chartIt();
+            async function chartIt() {
+                const ctx = document.getElementById("chart");
+                const data = await getData();
+                new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: data.xlables,
+                        datasets: [
+                            {
+                                label: "temperature",
+                                data: data.ylables,
+                                borderWidth: 1,
+                                fill: false,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                            },
+                        },
+                    },
+                });
+            }
+            async function getData() {
+                const xlables = [];
+                const ylables = [];
+                const response = await fetch("ZonAnn.Ts+dSST.csv");
+                const data = await response.text();
+
+                const table = data.split("\n").slice(1);
+                table.forEach((row) => {
+                    const col = row.split(",");
+                    const year = col[0];
+                    xlables.push(year);
+                    const temp = col[1];
+                    ylables.push(parseFloat(temp) + 14);
+                });
+                return { xlables, ylables };
+            }
+        </script>
+    </body>
+</html>
